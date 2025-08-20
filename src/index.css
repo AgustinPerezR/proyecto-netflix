@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "system-ui";
+}
+
+.card {
+  background: #27272a; /* bg-neutral-800 */
+  border: 2px solid rgb(24, 24, 24);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover,
+.card:focus {
+  /* Usamos la variable --card-color para ambos */
+  outline: none;
+  border-color: var(--card-color);
+  box-shadow: 0 0 30px var(--card-color);
+  transform: scale(1.02); /* 👈 Agrandado suave */
+  z-index: 1;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-category {
+  color: var(--card-color);
+  border: 1px solid white;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card-category:hover,
+.card-category:focus {
+  border-color: var(--card-color);
+  box-shadow: 0 0 30px var(--card-color);
+}
+
+/* BOTON */
+
+.boton {
+  background: var(--boton-bg-color);
+}
+.boton:hover,
+.boton:focus {
+  /* Usamos la variable --boton-color para ambos */
+  outline: none;
+  border-color: var(--boton-color);
+  color: var(--boton-color); /* 👈 Esto cambiará el color del texto */
+  box-shadow: 0 0 30px var(--boton-color);
+  transform: scale(1.02); /* 👈 Agrandado suave */
+  filter: brightness(1.3); /* 👈 Brillo suave */
+}
+
+.poster {
+  background: #27272a; /* bg-neutral-800 */
+  border: 2px solid var(--poster-color);
+  box-shadow: 0 0 40px var(--poster-color);
+
+  /* transition: border-color 0.3s, box-shadow 0.3s; */
+}

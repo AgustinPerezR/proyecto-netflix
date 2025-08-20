@@ -1,0 +1,45 @@
+/* .card-season {
+  background: #27272a; 
+  border: 3px solid rgb(24, 24, 24);
+  transition: all 0.2s ease;
+  z-index: var(--z-index);
+} */
+.card-season {
+  border: 1px solid rgb(25, 25, 25);
+  transition: 0.4s ease-out;
+  position: relative;
+  box-sizing: border-box;
+
+  left: 0px;
+}
+
+.card-season img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-season:not(:first-child) {
+  margin-left: -100px; /*regularlo*/
+}
+
+.card-season:hover,
+.card-season:focus {
+  transform: translateY(-15px);
+  transition: 0.4s ease-out;
+  outline: none;
+  border: 3px solid var(--card-color);
+  box-shadow: 0 0 50px var(--card-color);
+}
+
+.card-season:hover ~ .card-season,
+.card-season:focus ~ .card-season {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+/*
+.carousel-container:has(.card-season:hover) .card-season:not(:hover) {
+  z-index: var(--z-index-adjacent);
+} */
