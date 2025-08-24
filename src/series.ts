@@ -148,16 +148,71 @@ export const series: Serie[] = [
     id: 4,
     type: "serie",
     title: "Better Call Saul",
-    poster: "Better Call Saul (2015).jpg",
+    poster: "/series/better_call_saul/Better Call Saul (2015).jpg",
     color: "rgba(249, 223, 149, 0.8)",
     background:
-      "https://image.tmdb.org/t/p/original/8Xr6d9k2b1z5Z3c4e7j5f9ovAM9v.jpg",
+      "https://image.tmdb.org/t/p/original/egcNHq9PQDprPPTDlF3rys6WVy.jpg",
     seasons: 6,
     episodes: 63,
     creator: "Vince Gilligan, Peter Gould",
     synopsis:
       "La historia de cómo Jimmy McGill se convierte en el abogado criminal Saul Goodman.",
-    seasons_data: [],
+    seasons_data: [
+      {
+        id_serie: 4,
+        season_number: 1,
+        year: 2015,
+        poster:
+          "/series/better_call_saul/Better Call Saul (2015) - Season 1.png",
+        color: "rgba(96, 127, 159, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 4,
+        season_number: 2,
+        year: 2016,
+        poster:
+          "/series/better_call_saul/Better Call Saul (2015) - Season 2.png",
+        color: "rgba(129, 129, 125, 1)",
+        episodes: 10,
+      },
+      {
+        id_serie: 4,
+        season_number: 3,
+        year: 2017,
+        poster:
+          "/series/better_call_saul/Better Call Saul (2015) - Season 3.png",
+        color: "rgba(42, 58, 96, 1)",
+        episodes: 10,
+      },
+      {
+        id_serie: 4,
+        season_number: 4,
+        year: 2020,
+        poster:
+          "/series/better_call_saul/Better Call Saul (2015) - Season 4.png",
+        color: "rgba(107, 107, 107, 1)",
+        episodes: 10,
+      },
+      {
+        id_serie: 4,
+        season_number: 5,
+        year: 2020,
+        poster:
+          "/series/better_call_saul/Better Call Saul (2015) - Season 5.png",
+        color: "rgba(231, 231, 231, 1)",
+        episodes: 10,
+      },
+      {
+        id_serie: 4,
+        season_number: 6,
+        year: 2022,
+        poster:
+          "/series/better_call_saul/Better Call Saul (2015) - Season 6.png",
+        color: "rgba(0, 0, 0, 1)",
+        episodes: 13,
+      },
+    ],
   },
   {
     id: 5,
@@ -300,17 +355,41 @@ export const series: Serie[] = [
     id: 9,
     type: "serie",
     title: "El Juego del Calamar",
-    poster: "Squid Game (2021).jpg",
+    poster: "/series/juego_del_calamar/Squid Game (2021).jpg",
     color: "rgba(224, 139, 69, 0.8)",
-    // color: "#ff0161",
     background:
-      "https://image.tmdb.org/t/p/original/8Xr6d9k2b1z5Z3c4e7j5f9ovAM9v.jpg",
+      "https://image.tmdb.org/t/p/original/kYd5XcqkoepnZ7MJjtIicfcdTlJ.jpg",
     seasons: 1,
     episodes: 9,
     creator: "Hwang Dong-hyuk",
     synopsis:
       "Un grupo de personas con problemas financieros acepta una misteriosa invitación para participar en un juego mortal.",
-    seasons_data: [],
+    seasons_data: [
+      {
+        id_serie: 9,
+        season_number: 1,
+        year: 2021,
+        poster: "/series/juego_del_calamar/Squid Game (2021) - Season 1.png",
+        color: "rgba(234, 202, 43, 0.8)",
+        episodes: 9,
+      },
+      {
+        id_serie: 9,
+        season_number: 2,
+        year: 2024,
+        poster: "/series/juego_del_calamar/Squid Game (2021) - Season 2.png",
+        color: "rgba(181, 69, 32, 0.8)",
+        episodes: 7,
+      },
+      {
+        id_serie: 9,
+        season_number: 3,
+        year: 2025,
+        poster: "/series/juego_del_calamar/Squid Game (2021) - Season 3.png",
+        color: "rgba(50, 100, 150, 0.8)",
+        episodes: 6,
+      },
+    ],
   },
   {
     id: 10,
@@ -321,13 +400,78 @@ export const series: Serie[] = [
     poster: "/series/Rick Y Morty/Rick and Morty (2013).jpeg",
     color: "rgba(163, 216, 66, 0.8)",
     background:
-      "https://image.tmdb.org/t/p/original/8Xr6d9k2b1z5Z3c4e7j5f9ovAM9v.jpg",
+      "https://image.tmdb.org/t/p/original/9In9QgVJx7PlFOAgVHCKKSbo605.jpg",
     seasons: 8,
     episodes: 80,
     creator: "Justin Roiland, Dan Harmon",
     synopsis:
       "Un científico loco y su nieto viajan a través de dimensiones y realidades paralelas.",
-    seasons_data: [],
+    seasons_data: [
+      {
+        id_serie: 10,
+        season_number: 1,
+        year: 2013,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 1.jpg",
+        color: "rgba(163, 216, 66, 0.8)",
+        episodes: 11,
+      },
+      {
+        id_serie: 10,
+        season_number: 2,
+        year: 2015,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 2.jpg",
+        color: "rgba(100, 150, 200, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 10,
+        season_number: 3,
+        year: 2017,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 3.jpg",
+        color: "rgba(200, 100, 150, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 10,
+        season_number: 4,
+        year: 2020,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 4.jpg",
+        color: "rgba(150, 200, 100, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 10,
+        season_number: 5,
+        year: 2021,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 5.jpg",
+        color: "rgba(255, 100, 100, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 10,
+        season_number: 6,
+        year: 2022,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 6.jpg",
+        color: "rgba(100, 255, 100, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 10,
+        season_number: 7,
+        year: 2023,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 7.jpg",
+        color: "rgba(100, 100, 255, 0.8)",
+        episodes: 10,
+      },
+      {
+        id_serie: 10,
+        season_number: 8,
+        year: 2024,
+        poster: "/series/Rick Y Morty/Rick and Morty (2013) - Season 8.jpg",
+        color: "rgba(255, 255, 100, 0.8)",
+        episodes: 10,
+      },
+    ],
   },
   {
     id: 11,
@@ -336,7 +480,7 @@ export const series: Serie[] = [
     poster: "/series/stranger_things/Stranger Things (2016).jpg",
     color: "rgba(227, 33, 33, 0.8)",
     background:
-      "https://image.tmdb.org/t/p/original/8Xr6d9k2b1z5Z3c4e7j5f9ovAM9v.jpg",
+      "https://image.tmdb.org/t/p/original/ihBfoad7sOdPrlMRXmAr3YqQkzW.jpg",
     seasons: 5,
     episodes: 34,
     creator: "The Duffer Brothers",
@@ -347,7 +491,7 @@ export const series: Serie[] = [
         id_serie: 11,
         season_number: 1,
         year: 2016,
-        poster: "/series/stranger_things/Stranger Things (2016) - Season 1.jpg",
+        poster: "/series/stranger_things/Stranger Things (2016) - Season 1.png",
         color: "rgba(255, 255, 255, 0.8)",
         episodes: 8,
       },
@@ -355,7 +499,7 @@ export const series: Serie[] = [
         id_serie: 11,
         season_number: 2,
         year: 2017,
-        poster: "/series/stranger_things/Stranger Things (2016) - Season 2.jpg",
+        poster: "/series/stranger_things/Stranger Things (2016) - Season 2.png",
         color: "rgba(255, 255, 255, 0.8)",
         episodes: 9,
       },
@@ -363,7 +507,7 @@ export const series: Serie[] = [
         id_serie: 11,
         season_number: 3,
         year: 2019,
-        poster: "/series/stranger_things/Stranger Things (2016) - Season 3.jpg",
+        poster: "/series/stranger_things/Stranger Things (2016) - Season 3.png",
         color: "rgba(255, 255, 255, 0.8)",
         episodes: 8,
       },
@@ -371,7 +515,7 @@ export const series: Serie[] = [
         id_serie: 11,
         season_number: 4,
         year: 2022,
-        poster: "/series/stranger_things/Stranger Things (2016) - Season 4.jpg",
+        poster: "/series/stranger_things/Stranger Things (2016) - Season 4.png",
         color: "rgba(255, 255, 255, 0.8)",
         episodes: 9,
       },
@@ -379,7 +523,7 @@ export const series: Serie[] = [
         id_serie: 11,
         season_number: 5,
         year: 2024,
-        poster: "/series/stranger_things/Stranger Things (2016) - Season 5.jpg",
+        poster: "/series/stranger_things/Stranger Things (2016) - Season 5.png",
         color: "rgba(255, 255, 255, 0.8)",
         episodes: 10,
       },
@@ -390,41 +534,16 @@ export const series: Serie[] = [
     type: "serie",
     title: "Los Simpsons",
     group: "animation",
-    poster: "series/los_simpsons/The Simpsons (1989).jpg",
+    poster: "/series/los_simpsons/The Simpsons (1989).jpg",
     color: "rgba(255, 255, 0, 0.8)",
     background:
-      "https://image.tmdb.org/t/p/original/8Xr6d9k2b1z5Z3c4e7j5f9ovAM9v.jpg",
+      "https://image.tmdb.org/t/p/original/3mVaX4kDs3YC96DKnSMOuG9QZQl.jpg",
     seasons: 35,
     episodes: 800,
     creator: "Matt Groening",
     synopsis:
       "La familia Simpson vive en la ciudad ficticia de Springfield y enfrenta diversas situaciones cómicas y satíricas.",
-    seasons_data: [
-      {
-        id_serie: 12,
-        season_number: 1,
-        year: 1989,
-        poster: "series/los_simpsons/The Simpsons (1989) - Season 1.jpg",
-        color: "rgba(255, 255, 0, 0.8)",
-        episodes: 13,
-      },
-      {
-        id_serie: 12,
-        season_number: 2,
-        year: 1990,
-        poster: "series/los_simpsons/The Simpsons (1989) - Season 2.jpg",
-        color: "rgba(255, 255, 0, 0.8)",
-        episodes: 22,
-      },
-      {
-        id_serie: 12,
-        season_number: 3,
-        year: 1991,
-        poster: "series/los_simpsons/The Simpsons (1989) - Season 3.jpg",
-        color: "rgba(255, 255, 0, 0.8)",
-        episodes: 24,
-      },
-    ],
+    seasons_data: [],
   },
   {
     id: 13,
@@ -585,7 +704,6 @@ export const series: Serie[] = [
       },
     ],
   },
-  // the mandalorian, samurai de ojos azules, bojack horseman
   {
     id: 17,
     type: "serie",
@@ -599,7 +717,7 @@ export const series: Serie[] = [
     episodes: 12,
     creator: "Michael Waldron",
     synopsis:
-      "Luego de los eventos de Avengers: Endgame, Loki se desvía de su línea de tiempo y es capturado por la Autoridad de Variación Temporal, una organización que controla el curso de la historia, eliminando cualquier línea alternativa y destruyendo todo lo que se devíe de la Sagrada Línea del Tiempo.",
+      "Después de los eventos de 'Avengers: Endgame', Loki se encuentra en una nueva línea temporal y debe enfrentarse a la Autoridad de Variación Temporal.",
     seasons_data: [
       {
         id_serie: 17,
@@ -714,7 +832,8 @@ export const series: Serie[] = [
     seasons: 6,
     episodes: 77,
     creator: "Raphael Bob-Waksberg",
-    synopsis: "",
+    synopsis:
+      "La vida de un actor fracasado que intenta encontrar su camino en el mundo.",
     seasons_data: [
       {
         id_serie: 21,
@@ -722,7 +841,7 @@ export const series: Serie[] = [
         year: 2014,
         poster:
           "/series/bojack_horseman/BoJack Horseman (2014) - Season 1.jpeg",
-        color: "rgba(255, 165, 0, 0.8)",
+        color: "rgba(255, 255, 255, 0.8)",
         episodes: 12,
       },
       {
@@ -731,7 +850,7 @@ export const series: Serie[] = [
         year: 2015,
         poster:
           "/series/bojack_horseman/BoJack Horseman (2014) - Season 2.jpeg",
-        color: "rgba(255, 165, 0, 0.8)",
+        color: "rgba(255, 255, 255, 0.8)",
         episodes: 12,
       },
       {
@@ -739,7 +858,7 @@ export const series: Serie[] = [
         season_number: 3,
         year: 2016,
         poster: "/series/bojack_horseman/BoJack Horseman (2014) - Season 3.jpg",
-        color: "rgba(255, 165, 0, 0.8)",
+        color: "rgba(255, 255, 255, 0.8)",
         episodes: 12,
       },
       {
@@ -747,7 +866,7 @@ export const series: Serie[] = [
         season_number: 4,
         year: 2017,
         poster: "/series/bojack_horseman/BoJack Horseman (2014) - Season 4.jpg",
-        color: "rgba(255, 165, 0, 0.8)",
+        color: "rgba(255, 255, 255, 0.8)",
         episodes: 12,
       },
       {
@@ -756,7 +875,7 @@ export const series: Serie[] = [
         year: 2018,
         poster:
           "/series/bojack_horseman/BoJack Horseman (2014) - Season 5.jpeg",
-        color: "rgba(255, 165, 0, 0.8)",
+        color: "rgba(255, 255, 255, 0.8)",
         episodes: 12,
       },
       {
@@ -765,7 +884,7 @@ export const series: Serie[] = [
         year: 2020,
         poster:
           "/series/bojack_horseman/BoJack Horseman (2014) - Season 6.jpeg",
-        color: "rgba(255, 165, 0, 0.8)",
+        color: "rgba(255, 255, 255, 0.8)",
         episodes: 16,
       },
     ],
