@@ -15,6 +15,7 @@ export type Movie = BaseMedia & {
   duration: string;
   description: string;
 };
+
 export type SeasonSerie = {
   id_serie: number;
   season_number: number;
@@ -22,7 +23,7 @@ export type SeasonSerie = {
   poster: string;
   color: string;
   background?: string;
-  episodes: number;
+  episodes: Array<{ number: number; progress: number }>; // progreso entre 0 y 100
 };
 
 export type Serie = BaseMedia & {

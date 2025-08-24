@@ -5,7 +5,7 @@
   z-index: var(--z-index);
 } */
 .card-season {
-  border: 1px solid rgb(25, 25, 25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: 0.4s ease-out;
   position: relative;
   box-sizing: border-box;
@@ -25,18 +25,48 @@
 
 .card-season:hover,
 .card-season:focus {
-  transform: translateY(-15px);
+  /* transform: translateY(-15px); */
+  /* transform: translateY(var(--translate-y)); */
   transition: 0.4s ease-out;
   outline: none;
-  border: 3px solid var(--card-color);
-  box-shadow: 0 0 50px var(--card-color);
+  /* border: 3px solid var(--card-color);
+  box-shadow: 0 0 50px var(--card-color); */
 }
 
+.card-season.selected:hover,
+.card-season.selected:focus {
+  transform: translateY(-15px) scale(1.03);
+}
+
+/* Efecto "siempre seleccionada" */
+.card-season.selected {
+  transform: scale(1.03);
+  border: 3px solid var(--card-color);
+  box-shadow: 0 0 100px var(--card-color);
+}
+
+/* Efecto para todas las cards siguientes */
 .card-season:hover ~ .card-season,
 .card-season:focus ~ .card-season {
-  position: relative;
-  left: 50px;
+  left: 20px;
   transition: 0.4s ease-out;
+}
+
+/* Efecto para la siguiente card (hermano inmediato siguiente) */
+.card-season:hover + .card-season,
+.card-season:focus + .card-season {
+  left: 30px;
+  transition: 0.4s ease-out;
+}
+
+/* Efecto para todas las cards anteriores */
+.card-season:has(~ .card-season:hover, ~ .card-season:focus):not(:first-child) {
+  left: -20px;
+}
+/* Efecto para la card anterior (hermano inmediato anterior) */
+
+.card-season:has(+ .card-season:hover, + .card-season:focus):not(:first-child) {
+  left: -30px;
 }
 
 /*

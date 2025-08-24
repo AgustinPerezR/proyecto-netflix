@@ -1,7 +1,7 @@
 import { series } from "../series.ts";
 import CarouselSeason from "../components/CarouselSeasonSerie.tsx";
-import CardSeason from "../components/CardSeason.tsx";
 import ButtonEpisode from "../components/ButtonEpisode.tsx";
+import BackButton from "../components/BackButton.tsx";
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -12,20 +12,61 @@ export default function SeriePage({ id }: Props) {
   const numericId = id ?? Number(params.id);
   const serie = series.find((m) => m.id === numericId);
   const navigate = useNavigate();
-  // const DEFAULT_SELECTED_CARD = 0;
-  const [selectedSeason, setSelectedSeason] = useState(serie?.seasons_data[0]);
 
-  // const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(
-  //   DEFAULT_SELECTED_CARD
-  // );
-
-  if (!serie) {
+  // Si la serie no existe o no tiene temporadas
+  if (!serie || serie.seasons_data.length === 0) {
     return (
-      <p className="text-center text-red-500 mt-10 font-handwritten">
-        Serie no encontrada.
-      </p>
+      <>
+        <BackButton />
+        <p className="text-center text-white mt-10 font-handwritten">
+          Serie no encontrada.
+        </p>
+      </>
     );
   }
+
+  // Inicializamos seasonsData copiando la estructura original
+  const [seasonsData, setSeasonsData] = useState(() =>
+    serie?.seasons_data.map((season) => ({
+      ...season,
+      episodes: season.episodes.map((ep) => ({
+        ...ep,
+        progress: ep.progress ?? 0,
+      })),
+    }))
+  );
+
+  // Controlamos la temporada seleccionada con su número
+  const [selectedSeasonNumber, setSelectedSeasonNumber] = useState(
+    serie?.seasons_data[0].season_number
+  );
+
+  // Obtenemos la temporada seleccionada desde seasonsData (NO del JSON original)
+  const selectedSeason = seasonsData?.find(
+    (season) => season.season_number === selectedSeasonNumber
+  );
+
+  // ✅ Actualiza el progreso de un episodio
+  const updateEpisodeProgress = (
+    seasonNumber: number,
+    episodeNumber: number,
+    newProgress: number
+  ) => {
+    setSeasonsData((prev) =>
+      prev?.map((season) =>
+        season.season_number === seasonNumber
+          ? {
+              ...season,
+              episodes: season.episodes.map((ep) =>
+                ep.number === episodeNumber
+                  ? { ...ep, progress: newProgress }
+                  : ep
+              ),
+            }
+          : season
+      )
+    );
+  };
 
   return (
     <div
@@ -37,16 +78,10 @@ export default function SeriePage({ id }: Props) {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <button
-        onClick={() => navigate("/")}
-        className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full w-fit"
-        aria-label="Volver al inicio"
-        tabIndex={0}
-        data-section="back"
-      >
-        ←
-      </button>
+      {/* Botón volver */}
+      <BackButton />
 
+      {/* Header con info */}
       <div className="flex text-white mt-4">
         {/* Columna izquierda - Poster */}
         <div className="flex flex-col items-center bg-black/0 p-4 rounded-xl basis-[20%]">
@@ -60,37 +95,48 @@ export default function SeriePage({ id }: Props) {
         </div>
 
         {/* Columna central - Información */}
-        <div className="flex flex-col justify-start gap-4 bg-black/0 p-4  basis-[70%]">
+        <div className="flex flex-col justify-start gap-4 bg-black/0 p-4 basis-[70%]">
           <h1 className="text-4xl font-bold">{serie.title}</h1>
           <p className="text-lg">{serie.synopsis}</p>
           <p className="text-md font-semibold">Creador: {serie.creator}</p>
 
-          <div className=" justify-left mt-4 p-4 bg-black/10 rounded-lg">
+          {/* Carrusel de temporadas */}
+          <div className="justify-left mt-4 p-4 bg-black/10 rounded-lg">
             <CarouselSeason
-              selectedIndex={serie.seasons_data.findIndex(
-                (season) =>
-                  season.season_number === selectedSeason?.season_number
+              selectedIndex={seasonsData.findIndex(
+                (season) => season.season_number === selectedSeasonNumber
               )}
-              seasons_data={serie.seasons_data}
-              onSelectSeason={setSelectedSeason}
+              seasons_data={seasonsData}
+              onSelectSeason={(season) =>
+                setSelectedSeasonNumber(season.season_number)
+              }
             />
           </div>
         </div>
       </div>
 
-      {/* Episodios */}
+      {/* Lista de episodios */}
+
       {selectedSeason && (
         <div className="bg-black/10 p-4 rounded-lg mt-0">
           <h2 className="text-2xl font-bold text-white mb-4">
-            Temporada {selectedSeason?.season_number}
+            Temporada {selectedSeason.season_number}
           </h2>
           <div className="flex flex-wrap gap-4" data-section="episodes">
-            {Array.from({ length: selectedSeason?.episodes || 0 }, (_, i) => (
+            {selectedSeason.episodes.map((ep) => (
               <ButtonEpisode
-                key={i + 1}
-                episodeNumber={i + 1}
-                seasonNumber={selectedSeason?.season_number || 0}
-                colorSeason={selectedSeason?.color}
+                key={ep.number}
+                episodeNumber={ep.number}
+                seasonNumber={selectedSeason.season_number}
+                colorSeason={selectedSeason.color}
+                progress={ep.progress}
+                onChangeProgress={(newProgress) =>
+                  updateEpisodeProgress(
+                    selectedSeason.season_number,
+                    ep.number,
+                    newProgress
+                  )
+                }
               />
             ))}
           </div>

@@ -63,3 +63,12 @@ body {
 
   /* transition: border-color 0.3s, box-shadow 0.3s; */
 }
+
+.button-episode:hover,
+.button-episode:focus {
+  outline: none;
+  border: 2px solid white;
+  box-shadow: 0 0 30px rgb(255, 255, 255);
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}

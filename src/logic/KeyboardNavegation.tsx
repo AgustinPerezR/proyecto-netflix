@@ -111,17 +111,6 @@ export default function KeyboardNavigation() {
 
     return () => observer.disconnect();
   }, []);
-  // useEffect(() => {
-  //   // Detecta las secciones al montar
-  //   const detectedSections = getSectionNames();
-  //   console.log("Secciones detectadas:", detectedSections);
-  //   setSections(detectedSections);
-
-  //   // Inicializa la sección actual
-  //   currentSectionRef.current = detectedSections[0] || "";
-  //   sectionIndexRef.current = 0;
-  //   indexRef.current = 0;
-  // }, []);
 
   // Restaurar scroll y foco al montar el componente
   restoreScrollAndFocus(currentSectionRef, sectionIndexRef, indexRef);
@@ -130,6 +119,8 @@ export default function KeyboardNavigation() {
     if (sections.length === 0) return; // Espera a que sections esté listo
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
+
       const section = currentSectionRef.current;
       const focusables = getFocusableElements(section);
 

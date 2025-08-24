@@ -2,29 +2,60 @@ type ButtonProps = {
   episodeNumber: number;
   seasonNumber: number;
   colorSeason?: string;
-  // onClick: () => void;
+  progress: number; // 0, 50, 100
+  onChangeProgress: (newProgress: number) => void;
 };
 
 export default function ButtonEpisode({
   episodeNumber,
-  seasonNumber,
   colorSeason,
+  progress,
+  onChangeProgress,
 }: ButtonProps) {
   const handleClick = () => {
-    // Aquí puedes manejar el evento de clic si es necesario
-    console.log(
-      `Episodio ${episodeNumber} de la temporada ${seasonNumber} clickeado`
-    );
+    console.log(`Episodio ${episodeNumber} clickeado`);
   };
-  //cuadrado pequeño con el numero del episodio y background del color de la temporada
+
+  const handleSetProgress = (value: number) => {
+    onChangeProgress(value);
+  };
+
   return (
-    <button
-      className="w-10 h-10 rounded-full text-white flex items-center justify-center text-xs font-semibold transition-transform hover:scale-110"
-      style={{ backgroundColor: colorSeason }}
-      onClick={handleClick}
-      tabIndex={0}
-    >
-      {episodeNumber}
-    </button>
+    <div className="relative flex flex-col items-center">
+      {/* Botón principal */}
+      <button
+        className="button-episode w-10 h-10 rounded-full text-white flex items-center justify-center 
+        text-xs font-semibold transition-transform hover:scale-110 focus:scale-110 
+        relative overflow-hidden"
+        onClick={handleClick}
+        tabIndex={0}
+        style={{
+          backgroundColor: `#2228`,
+        }}
+      >
+        {/* Capa de progreso */}
+        <div
+          className="absolute top-0 left-0 h-full"
+          style={{
+            width: `${progress}%`,
+            backgroundColor: colorSeason,
+            zIndex: 1,
+            transition: "width 0.3s ease",
+          }}
+        />
+        {/* Texto del número */}
+        <span className="relative z-10">{episodeNumber}</span>
+      </button>
+
+      {/* Botones para cambiar progreso */}
+      <div className="flex gap-1 mt-1 opacity-0 hover:opacity-100 transition">
+        <button onClick={() => handleSetProgress(0)} className="text-xs">
+          0%
+        </button>
+        <button onClick={() => handleSetProgress(100)} className="text-xs">
+          100%
+        </button>
+      </div>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import type { SeasonSerie } from "../types.ts";
 import CardSeason from "./CardSeason.tsx";
-import "./CardSeason.css";
 
 type CarouselProps = {
   selectedIndex: number;
@@ -9,7 +8,7 @@ type CarouselProps = {
   onSelectSeason?: (season: SeasonSerie) => void;
 };
 
-export default function Carousel({
+export default function CarouselSeason({
   selectedIndex,
   seasons_data,
   onSelectSeason,
@@ -33,18 +32,10 @@ export default function Carousel({
   }, []);
 
   const n = seasons_data.length;
-  const cant_puntos = 2 * n - 1;
-
-  // todos los puntos globales
-  const puntos = Array.from({ length: cant_puntos }, (_, i) => i - (n - 1));
-  // console.log("Puntos:", puntos);
-
   return (
-    // <div className="carousel-container relative group border border-white/30 bg-black rounded-lg">
-    <div className="carousel-container flex" data-section="carousel">
+    <div className="carousel-container flex" data-section="seasons">
       {seasons_data.map((season, index) => {
         // para cada card, sus posiciones posibles
-        const posiciones = puntos.slice(index, index + n);
 
         return (
           <CardSeason
@@ -53,13 +44,11 @@ export default function Carousel({
             index={index}
             totalCards={n}
             selectedIndex={selectedIndex}
-            posiciones={posiciones} // 👈 ahora la card sabe dónde puede estar
             onClick={() => onSelectSeason?.(season)}
             onCardHover={() => onSelectSeason?.(season)}
           />
         );
       })}
-      {/* </div> */}
     </div>
   );
 }

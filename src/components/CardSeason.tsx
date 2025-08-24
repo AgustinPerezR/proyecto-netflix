@@ -9,7 +9,6 @@ type CardSeasonProps = {
   onCardHover?: (index: number) => void;
   onCardLeave?: () => void;
   onClick?: () => void;
-  posiciones: number[]; // 👈 nuevo
 
   hoveredIndex?: number | null;
   selectedIndex?: number; // 🔹 agregado
@@ -22,7 +21,6 @@ const CardSeason: React.FC<CardSeasonProps> = ({
   onCardHover,
   onCardLeave,
   onClick,
-  posiciones,
   hoveredIndex,
   selectedIndex,
 }) => {
@@ -32,24 +30,28 @@ const CardSeason: React.FC<CardSeasonProps> = ({
   const offset = index - (selectedIndex ?? 0);
 
   // 🔹 si offset está dentro de posiciones, usamos ese valor
-  const currentPos = posiciones.includes(offset) ? offset : posiciones[0];
+  // const currentPos = posiciones.includes(offset) ? offset : posiciones[0];
 
   // 🔹 zIndex = más alto cuanto más cerca de 0 esté
-  const zIndex = 100 - Math.abs(currentPos);
+  const zIndex = 100 - Math.abs(offset);
 
   return (
     <div
       // className="card-season w-60 cursor-pointer rounded-xl relative  transition-transform duration-500"
-      className="card-season w-48 flex rounded-xl aspect-[2/3] cursor-pointer overflow-hidden"
+      className={`card-season w-48 ${
+        selectedIndex === index ? "selected" : ""
+      } flex rounded-xl aspect-[2/3] cursor-pointer overflow-hidden`}
       tabIndex={0}
       style={
         {
           "--card-color": data.color,
+          "--translate-y": "-15px",
           zIndex,
         } as React.CSSProperties
       }
       onClick={handleClick}
       onMouseEnter={() => onCardHover?.(index)}
+      onFocus={() => onCardHover?.(index)}
       onMouseLeave={() => onCardLeave?.()}
     >
       <img
