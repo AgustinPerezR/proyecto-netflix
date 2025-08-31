@@ -26,7 +26,7 @@ export default function Carousel({ children }: CarouselProps) {
 
       <div ref={scrollContainerRef} className="overflow-hidden scroll-smooth">
         <div
-          className="flex gap-4 py-4 px-3"
+          className="flex gap-4 py-5 px-3 bg-black/10 overflow-visible"
           style={{
             minWidth: "max-content",
           }}

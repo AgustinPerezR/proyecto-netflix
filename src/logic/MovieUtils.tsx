@@ -1,7 +1,9 @@
 // movieUtils.ts
 import { genres } from "../constants";
 import type { Movie } from "../types";
-const parseDuration = (duration: string) => {
+
+// devuelve la duración en minutos
+const parseDuration = (duration: string): number => {
   const match = duration.match(/(\d+)h\s*(\d+)?min?/i);
   if (match) {
     const hours = parseInt(match[1], 10);
@@ -13,6 +15,22 @@ const parseDuration = (duration: string) => {
   return 0;
 };
 
+const durationOrder = (label: string) => {
+  switch (label) {
+    case "Menos de 1h 30min":
+      return 90;
+    case "Entre 1h 30min y 2h":
+      return 120;
+    case "Entre 2h y 2h 30min":
+      return 150;
+    case "Entre 2h 30min y 3h":
+      return 180;
+    case "Más de 3h":
+      return 999; // arbitrario para el grupo más largo
+    default:
+      return 0;
+  }
+};
 // Devuelve un diccionario de películas agrupadas por década.
 // ejemplo de acceso: groupByDecade(movies)["Años 90s"]
 export const groupByDecade = (movies: Movie[]) => {
@@ -114,9 +132,77 @@ export const groupMovies = (movies: any[], grouping: string) => {
   }
 };
 
-export const filterMoviesByGenre = (movies: any[], selectedGenres: string[]) =>
-  selectedGenres.length > 0
-    ? movies.filter(
-        (m) => m.genre && selectedGenres.includes(m.genre.toLowerCase())
-      )
-    : movies;
+// ordenamiento:
+export const sortMovies = (movies: Movie[], order: string) => {
+  const sorted = [...movies]; // copiamos el array original
+  switch (order) {
+    case "title_asc": //de la A a la Z
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    case "title_desc": //de la Z a la A
+      return sorted.sort((a, b) => b.title.localeCompare(a.title));
+    case "year_asc": //del más antiguo al más reciente
+      return sorted.sort((a, b) => a.year - b.year);
+    case "year_desc": //del más reciente al más antiguo
+      return sorted.sort((a, b) => b.year - a.year);
+    case "duration_asc": //de menor a mayor duración
+      return sorted.sort(
+        (a, b) => parseDuration(a.duration) - parseDuration(b.duration)
+      );
+    case "duration_desc": //de mayor a menor duración
+      return sorted.sort(
+        (a, b) => parseDuration(b.duration) - parseDuration(a.duration)
+      );
+    default:
+      return sorted;
+  }
+};
+
+export const sortGroupedMovies = (
+  grouped: Record<string, Movie[]>,
+  grouping: string,
+  selectedOrder: string
+): [string, Movie[]][] => {
+  const entries = Object.entries(grouped);
+
+  if (grouping === "decade") {
+    entries.sort((a, b) => {
+      const yearA = parseInt(a[0].match(/\d+/)?.[0] || "0");
+      const yearB = parseInt(b[0].match(/\d+/)?.[0] || "0");
+      return selectedOrder === "year_asc" ? yearA - yearB : yearB - yearA;
+    });
+  } else if (grouping === "genre" || grouping === "director") {
+    entries.sort((a, b) =>
+      selectedOrder === "title_desc"
+        ? b[0].localeCompare(a[0])
+        : a[0].localeCompare(b[0])
+    );
+  } else if (grouping === "duration") {
+    entries.sort((a, b) => {
+      return selectedOrder === "duration_desc"
+        ? durationOrder(b[0]) - durationOrder(a[0])
+        : durationOrder(a[0]) - durationOrder(b[0]);
+    });
+  }
+
+  return entries;
+};
+
+export const filterMoviesByGenre = (
+  movies: Movie[],
+  selectedGenres: string[]
+) =>
+  selectedGenres.length === 0
+    ? movies
+    : movies.filter(
+        (m) => m.genre && m.genre.some((g) => selectedGenres.includes(g))
+      );
+
+export const filterMoviesByDuration = (
+  movies: Movie[],
+  durationRange: [number, number]
+) =>
+  movies.filter(
+    (m) =>
+      parseDuration(m.duration) >= durationRange[0] &&
+      parseDuration(m.duration) <= durationRange[1]
+  );

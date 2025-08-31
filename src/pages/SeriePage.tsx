@@ -16,12 +16,12 @@ export default function SeriePage({ id }: Props) {
   // Si la serie no existe o no tiene temporadas
   if (!serie || serie.seasons_data.length === 0) {
     return (
-      <>
+      <div className="px-8 pt-2">
         <BackButton />
         <p className="text-center text-white mt-10 font-handwritten">
           Serie no encontrada.
         </p>
-      </>
+      </div>
     );
   }
 

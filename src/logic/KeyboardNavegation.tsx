@@ -1,24 +1,20 @@
 // KeyboardNavigation.tsx
 import { useEffect, useRef, useState } from "react";
 
-//  Aquí gestionamos la navegación por teclado en la aplicación
+//  Aquí gestionamos la navegación por teclado en la aplicación (cuando se encuentra en el HOME)
 // y el foco en los elementos interactivos de las secciones.
 
-// Definimos las páginas y secciones que vamos a manejar
-
-const pages = ["home", "movie-page", "serie-page", "search"];
-
+// obtiene los nombres de las secciones (excluyendo side-bar)
 function getSectionNames() {
-  // Busca todos los elementos con data-section y obtiene los nombres únicos
   const nodes = document.querySelectorAll<HTMLElement>("[data-section]");
   const names = Array.from(nodes)
     .map((node) => node.getAttribute("data-section"))
+    .filter((name) => name !== "side-bar")
     .filter(Boolean);
-  // Elimina duplicados
   return Array.from(new Set(names)) as string[];
 }
 
-// funcion para obtener los elementos focusables de una sección
+// obtiene los elementos enfocables de una sección específica
 function getFocusableElements(section: string) {
   return Array.from(
     document.querySelectorAll<HTMLElement>(
@@ -69,16 +65,13 @@ function restoreScrollAndFocus(
   const savedIndex = sessionStorage.getItem("indexRef");
 
   if (savedScroll) {
-    console.log("Restaurando scroll:", savedScroll);
-    window.scrollTo(1, parseInt(savedScroll));
+    // todo: quitar si es innecesario
+    window.scrollTo(0, parseInt(savedScroll));
   }
-
   if (savedSection) {
     currentSectionRef.current = savedSection;
-    // sectionIndexRef.current = sections.indexOf(savedSection);
     indexRef.current = savedIndex ? parseInt(savedIndex) : 0;
   }
-
   if (savedSectionIndex) {
     sectionIndexRef.current = Number(savedSectionIndex);
   }
@@ -112,8 +105,10 @@ export default function KeyboardNavigation() {
     return () => observer.disconnect();
   }, []);
 
-  // Restaurar scroll y foco al montar el componente
-  restoreScrollAndFocus(currentSectionRef, sectionIndexRef, indexRef);
+  useEffect(() => {
+    // Restaurar scroll y foco al montar el componente
+    restoreScrollAndFocus(currentSectionRef, sectionIndexRef, indexRef);
+  }, []);
 
   useEffect(() => {
     if (sections.length === 0) return; // Espera a que sections esté listo
@@ -125,13 +120,9 @@ export default function KeyboardNavigation() {
       const focusables = getFocusableElements(section);
 
       if (e.key === "ArrowUp") {
-        console.log("ArrowUp pressed");
-        console.log("sectionIndexRef.current:", sectionIndexRef.current);
-        console.log("sections:", sections);
         if (sectionIndexRef.current > 0) {
-          // Guardar índice actual antes de cambiar
           lastFocusedIndexPerSection.current.set(section, indexRef.current);
-
+          // me muevo a las seccion de arriba
           sectionIndexRef.current--;
           const newSection = sections[sectionIndexRef.current];
           indexRef.current =
@@ -141,12 +132,9 @@ export default function KeyboardNavigation() {
       }
 
       if (e.key === "ArrowDown") {
-        console.log("ArrowDown pressed");
-        console.log("sectionIndexRef.current:", sectionIndexRef.current);
-        console.log("sections:", sections);
         if (sectionIndexRef.current < sections.length - 1) {
           lastFocusedIndexPerSection.current.set(section, indexRef.current);
-
+          // me muevo a las seccion de abajo
           sectionIndexRef.current++;
           const newSection = sections[sectionIndexRef.current];
           indexRef.current =
@@ -156,24 +144,14 @@ export default function KeyboardNavigation() {
       }
 
       if (e.key === "ArrowLeft") {
-        if (section != "side-bar") {
-          indexRef.current -= 1;
-          if (indexRef.current < 0) {
-            console.log("Mover a side-bar");
-            currentSectionRef.current = "side-bar";
-            sectionIndexRef.current = sections.indexOf("side-bar");
-            indexRef.current = 0;
-          }
-        }
+        indexRef.current = Math.max(indexRef.current - 1, 0);
       }
 
       if (e.key === "ArrowRight") {
-        if (section != "side-bar") {
-          indexRef.current = Math.min(
-            indexRef.current + 1,
-            focusables.length - 1
-          );
-        }
+        indexRef.current = Math.min(
+          indexRef.current + 1,
+          focusables.length - 1
+        );
       }
 
       if (e.key === "Enter") {
@@ -225,48 +203,6 @@ export default function KeyboardNavigation() {
 
     window.addEventListener("focusin", handleFocusIn);
 
-    // const handleClick = (e: MouseEvent) => {
-    //   const target = e.target as HTMLElement;
-
-    //   // Buscamos el elemento más cercano con tabindex="0" (la card real)
-    //   const card = target.closest<HTMLElement>('[tabindex="0"]');
-    //   if (!card) {
-    //     return;
-    //   }
-
-    //   // Obtenemos la sección del card o de un padre con data-section
-    //   const section =
-    //     card.getAttribute("data-section") ||
-    //     card
-    //       .closest<HTMLElement>("[data-section]")
-    //       ?.getAttribute("data-section");
-    //   if (!section) {
-    //     return;
-    //   }
-
-    //   const focusables = getFocusableElements(section);
-    //   const index = focusables.indexOf(card);
-    //   const isFocused =
-    //     section == currentSectionRef.current && index == indexRef.current;
-
-    //   if (isFocused) {
-    //     // Si ya está enfocado, simula Enter (click programático)
-    //     // card.click();
-    //     focusables[indexRef.current]?.click();
-
-    //     console.log("CLICK ");
-    //   } else {
-    //     console.log(target);
-    //     console.log("Click outside focus:", { section, index, isFocused });
-
-    //     // Si no está enfocado, podés actualizar el foco aquí (opcional)
-    //     currentSectionRef.current = section;
-    //     indexRef.current = index;
-    //     focusElement(section, index);
-    //   }
-    // };
-    // window.addEventListener("click", handleClick);
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("focusin", handleFocusIn);
@@ -283,7 +219,6 @@ export default function KeyboardNavigation() {
       const el = focusables[index];
 
       if (el) {
-        // console.log("Scroll restaurado en:", el);
         el.focus();
         el.scrollIntoView({
           behavior: "instant", // o "smooth"

@@ -5,6 +5,7 @@ import ContinueWatching from "../components/ContinueWatching";
 import SeriesPop from "../components/SeriesPop";
 import MoviesPop from "../components/MoviesPop";
 import MoviesDrama from "../components/MoviesDrama.tsx";
+import MovieCarousel from "../components/MovieCarousel.tsx";
 import { useEffect } from "react";
 import { movies } from "../movies.ts";
 
@@ -113,23 +114,12 @@ function setupKeyboardNavigation() {
 
 // 🔹 4. Componente principal
 export default function Home() {
-  // useEffect(() => {
-  //   restoreScrollAndFocus();
-  //   clearSessionStorageKeys(["homeScrollTop", "selectedCardId"]);
-  //   // Precargar fondos
-  //   movies.forEach((movie) => {
-  //     const img = new Image();
-  //     img.src = movie.background;
-  //   });
-
-  //   const cleanup = setupKeyboardNavigation();
-  //   return cleanup;
-  // }, []);
-
   return (
     <div className="space-y-6 p-4">
       <TopMenu />
-      <h2 className="text-white text-xl font-mono">Agregados recientemente</h2>
+      <h2 className="text-white text-xl font-mono px-4">
+        Agregados recientemente
+      </h2>
       <RecentlyAdded />
       <h2 className="text-white text-xl font-mono">Continuar viendo...</h2>
       <ContinueWatching />

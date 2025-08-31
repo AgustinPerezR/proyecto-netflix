@@ -2,6 +2,7 @@ type BaseMedia = {
   id: number;
   title: string;
   group?: string;
+  genre?: string[];
   poster: string;
   background: string;
   color: string;
@@ -9,7 +10,6 @@ type BaseMedia = {
 
 export type Movie = BaseMedia & {
   type: "movie";
-  genre?: string; // Optional for movies
   director: string;
   year: number;
   duration: string;
@@ -28,7 +28,6 @@ export type SeasonSerie = {
 
 export type Serie = BaseMedia & {
   type: "serie";
-  genre?: string;
   seasons: number;
   episodes: number;
   creator: string;
