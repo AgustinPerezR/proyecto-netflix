@@ -13,6 +13,7 @@ export default function SeriesPop() {
           media={{
             id: serie.id,
             title: serie.title,
+            year: serie.year,
             poster: serie.poster,
             background: serie.background,
             color: serie.color,

@@ -18,7 +18,7 @@ export default function RangeSlider({
   onChange,
 }: RangeSliderProps) {
   return (
-    <div className="">
+    <div data-section="range-slider" data-type="range-slider">
       <h3 className="text-white mb-3">{label}</h3>
       <Range
         values={values}
@@ -49,9 +49,9 @@ export default function RangeSlider({
           <div
             {...props}
             className="h-4 w-4 bg-white rounded-full border border-gray-500"
-            style={{
-              ...props.style,
-            }}
+            // style={{
+            //   ...props.style,
+            // }}
           />
         )}
       />

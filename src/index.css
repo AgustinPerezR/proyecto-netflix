@@ -31,7 +31,7 @@ body {
 
 .card-category {
   color: var(--card-color);
-  border: 1px solid white;
+  border: 2px solid rgb(75, 75, 75);
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -67,6 +67,15 @@ body {
 
 .button-episode:hover,
 .button-episode:focus {
+  outline: none;
+  border: 2px solid white;
+  box-shadow: 0 0 30px rgb(255, 255, 255);
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+.button-back:hover,
+.button-back:focus {
   outline: none;
   border: 2px solid white;
   box-shadow: 0 0 30px rgb(255, 255, 255);

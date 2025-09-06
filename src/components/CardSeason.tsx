@@ -1,9 +1,9 @@
-import { type SeasonSerie } from "../types.tsx";
+import { type SeasonData } from "../types.tsx";
 import React from "react";
 import "./CardSeason.css";
 
 type CardSeasonProps = {
-  data: SeasonSerie;
+  data: SeasonData;
   index: number;
   totalCards: number;
   onCardHover?: (index: number) => void;

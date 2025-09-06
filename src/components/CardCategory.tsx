@@ -30,12 +30,6 @@ export default function CardCategory({
       tabIndex={0}
       data-section={"top-menu"}
       style={{ "--card-color": color } as React.CSSProperties}
-
-      // "text-green-400",
-      // hoverBorder: "hover:shadow-[0_0_20px] hover:border-green-400",
-      // hoverShadow: "hover:shadow-green-400",
-      //   className="card-category w-64 h-96 bg-gray-800 rounded-xl p-4"
-      //   style={{ backgroundColor: `${color}` }}
     >
       <h3 className="text-lg font-bold mb-2 text-base md:text-xl lg:text-3xl font-sans">
         {text}

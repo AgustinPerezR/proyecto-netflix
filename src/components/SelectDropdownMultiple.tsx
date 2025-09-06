@@ -26,7 +26,7 @@ export default function MultipleSelectDropdown({
   return (
     <div className="filtro-genero color-white bg-black border border-white/50 rounded-md p-4">
       <h3 className="text-white mb-3">{label}</h3>
-      <div className="relative">
+      <div className="relative" data-section="select-dropdown-multiple">
         <button
           onClick={toggleDropdown}
           className="w-full flex items-center justify-between bg-gray-900 text-white 

@@ -1,6 +1,7 @@
 // movieUtils.ts
 import { genres } from "../constants";
 import type { Movie } from "../types";
+import type { Media } from "../types";
 
 // devuelve la duración en minutos
 const parseDuration = (duration: string): number => {
@@ -33,8 +34,8 @@ const durationOrder = (label: string) => {
 };
 // Devuelve un diccionario de películas agrupadas por década.
 // ejemplo de acceso: groupByDecade(movies)["Años 90s"]
-export const groupByDecade = (movies: Movie[]) => {
-  const groups: Record<string, Movie[]> = {};
+export const groupByDecade = (movies: Media[]) => {
+  const groups: Record<string, Media[]> = {};
   movies.forEach((movie) => {
     const decade = Math.floor(movie.year / 10) * 10;
     const key = `Años ${decade}s`;
@@ -56,8 +57,8 @@ export const groupByDecade = (movies: Movie[]) => {
 };
 
 // Agrupa las películas por género y devuelve en forma de diccionario.
-export const groupByGenre = (movies: Movie[]) => {
-  const groups: Record<string, Movie[]> = {};
+export const groupByGenre = (movies: Media[]) => {
+  const groups: Record<string, Media[]> = {};
 
   // Primero crear grupos para cada género definido
   genres.forEach((genre) => {
@@ -77,7 +78,7 @@ export const groupByGenre = (movies: Movie[]) => {
   });
 
   // Borrar grupos vacíos
-  const filteredGroups: Record<string, Movie[]> = {};
+  const filteredGroups: Record<string, Media[]> = {};
   Object.entries(groups).forEach(([key, movies]) => {
     if (movies.length > 0) {
       filteredGroups[key] = movies;
@@ -156,6 +157,21 @@ export const sortMovies = (movies: Movie[], order: string) => {
       return sorted;
   }
 };
+export const sortMedia = (movies: Media[], order: string) => {
+  const sorted = [...movies]; // copiamos el array original
+  switch (order) {
+    case "title_asc": //de la A a la Z
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    case "title_desc": //de la Z a la A
+      return sorted.sort((a, b) => b.title.localeCompare(a.title));
+    case "year_asc": //del más antiguo al más reciente
+      return sorted.sort((a, b) => a.year - b.year);
+    case "year_desc": //del más reciente al más antiguo
+      return sorted.sort((a, b) => b.year - a.year);
+    default:
+      return sorted;
+  }
+};
 
 export const sortGroupedMovies = (
   grouped: Record<string, Movie[]>,
@@ -187,15 +203,17 @@ export const sortGroupedMovies = (
   return entries;
 };
 
-export const filterMoviesByGenre = (
-  movies: Movie[],
-  selectedGenres: string[]
-) =>
+export const filterByGenre = (movies: Media[], selectedGenres: string[]) =>
   selectedGenres.length === 0
     ? movies
     : movies.filter(
         (m) => m.genre && m.genre.some((g) => selectedGenres.includes(g))
       );
+
+export const filterMoviesByGenre = (
+  movies: Movie[],
+  selectedGenres: string[]
+) => filterByGenre(movies, selectedGenres);
 
 export const filterMoviesByDuration = (
   movies: Movie[],

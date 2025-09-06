@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from "react";
-import type { SeasonSerie } from "../types.ts";
+import type { SeasonData } from "../types.ts";
 import CardSeason from "./CardSeason.tsx";
 
 type CarouselProps = {
   selectedIndex: number;
-  seasons_data: SeasonSerie[];
-  onSelectSeason?: (season: SeasonSerie) => void;
+  seasons_data: SeasonData[];
+  onSelectSeason?: (season: SeasonData) => void;
 };
 
 export default function CarouselSeason({

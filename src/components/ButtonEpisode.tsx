@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 type ButtonProps = {
+  idSerie: number;
   episodeNumber: number;
   seasonNumber: number;
   colorSeason?: string;
@@ -7,13 +9,17 @@ type ButtonProps = {
 };
 
 export default function ButtonEpisode({
+  idSerie,
+  seasonNumber,
   episodeNumber,
   colorSeason,
   progress,
   onChangeProgress,
 }: ButtonProps) {
+  const navigate = useNavigate();
   const handleClick = () => {
-    console.log(`Episodio ${episodeNumber} clickeado`);
+    // console.log(`Episodio ${episodeNumber} clickeado`);
+    navigate(`/watch/serie/${idSerie}/s/${seasonNumber}/e/${episodeNumber}`); // Ajusta la ruta según tu estructura
   };
 
   const handleSetProgress = (value: number) => {

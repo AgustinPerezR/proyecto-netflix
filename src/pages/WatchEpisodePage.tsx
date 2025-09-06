@@ -1,10 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { movies } from "../movies";
 import { series } from "../series";
-import { movieVideos } from "../videos";
 import { seriesVideos } from "../videos";
-import type { Media } from "../types";
+import type { Serie } from "../types";
 
 // Función auxiliar para extraer ID de Google Drive
 const extractDriveId = (url: string | undefined): string | null => {
@@ -13,22 +11,7 @@ const extractDriveId = (url: string | undefined): string | null => {
   return match ? match[1] : null;
 };
 
-// Función unificada para obtener el ID de Drive
-const obtenerIDDrive = (
-  media: Media,
-  season?: number,
-  episode?: number
-): string | null => {
-  if (media.type === "movie") {
-    return extractDriveId(movieVideos[media.id]);
-  } else if (media.type === "serie") {
-    if (season === undefined || episode === undefined) return null;
-    return extractDriveId(seriesVideos[media.id]?.[season]?.[episode]);
-  }
-  return null;
-};
-
-export default function WatchVideoPage() {
+export default function WatchEpisodePage() {
   const { id, season, episode } = useParams(); // episode y season solo se usan si es serie
   const navigate = useNavigate();
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -37,13 +20,21 @@ export default function WatchVideoPage() {
   const seasonNum = season ? Number(season) : undefined;
   const episodeNum = episode ? Number(episode) : undefined;
 
+  if (!seasonNum || !episodeNum) {
+    return (
+      <p className="text-center text-red-500 mt-10">
+        Temporada o episodio no especificado.
+      </p>
+    );
+  }
+
   // Buscar el media (puede ser película o serie)
-  const media: Media | undefined =
-    movies.find((m) => m.id === numericId) ||
-    series.find((s) => s.id === numericId);
+  const serie: Serie | undefined = series.find((s) => s.id === numericId);
 
   // Obtener videoId unificado
-  const videoId = media ? obtenerIDDrive(media, seasonNum, episodeNum) : null;
+  const videoId = extractDriveId(
+    seriesVideos[numericId]?.[seasonNum]?.[episodeNum]
+  );
 
   useEffect(() => {
     // Pedir pantalla completa al cargar
@@ -58,13 +49,24 @@ export default function WatchVideoPage() {
     // Manejar Escape para volver atrás
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") navigate(-1);
+
+      // Detectar Enter o Space
+      if (e.key === " " || e.key === "Enter") {
+        iframe?.focus(); // enfoca el iframe
+        // Hack: enviar un evento de teclado simulado
+        iframe?.contentWindow?.postMessage(
+          { type: "keypress", key: e.key },
+          "*"
+        );
+        console.log("Evento de teclado simulado enviado al iframe");
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [navigate]);
 
-  if (!media || !videoId) {
+  if (!serie || !videoId) {
     return (
       <p className="text-center text-red-500 mt-10">Video no encontrado.</p>
     );
@@ -80,8 +82,8 @@ export default function WatchVideoPage() {
       </button>
 
       <h1 className="text-2xl mb-4">
-        {media.title}{" "}
-        {media.type === "serie" && seasonNum && episodeNum
+        {serie.title}{" "}
+        {serie.type === "serie" && seasonNum && episodeNum
           ? `- Temporada ${seasonNum}, Episodio ${episodeNum}`
           : ""}
       </h1>
@@ -94,7 +96,7 @@ export default function WatchVideoPage() {
           height="100%"
           allow="autoplay"
           allowFullScreen
-          className="rounded-xl border border-white/20"
+          className="rounded-xl border border-black/10"
         ></iframe>
       </div>
     </div>

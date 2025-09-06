@@ -1,11 +1,12 @@
 import { type Serie } from "./types.tsx";
-import { type SeasonSerie } from "./types.tsx";
+import { type SeasonData } from "./types.tsx";
 
 export const series: Serie[] = [
   {
     id: 1,
     type: "serie",
     title: "Breaking Bad",
+    year: 2008,
     poster: "/Breaking Bad (2008).jpeg",
     // poster: "/series/breaking_bad/Breaking Bad (2008).jpg",
     color: "rgba(244, 189, 28, 0.8)",
@@ -132,6 +133,7 @@ export const series: Serie[] = [
     id: 2,
     type: "serie",
     title: "Dark",
+    year: 2017,
     poster: "/series/Dark/Dark (2017) (3).png",
     color: "rgba(88, 88, 88, 0.8)",
     background:
@@ -201,7 +203,8 @@ export const series: Serie[] = [
     id: 3,
     type: "serie",
     title: "Daredevil",
-    genre: "superheroes",
+    year: 2015,
+    genre: ["superheroes"],
     poster:
       "https://image.tmdb.org/t/p/original/5ND7iEoiDEaKBdE6ol5f9ovAM9v.jpg",
     color: "rgba(193, 20, 20, 0.8)",
@@ -286,6 +289,7 @@ export const series: Serie[] = [
     id: 4,
     type: "serie",
     title: "Better Call Saul",
+    year: 2008,
     poster: "/series/better_call_saul/Better Call Saul (2015).jpg",
     color: "rgba(249, 223, 149, 0.8)",
     background:
@@ -425,8 +429,9 @@ export const series: Serie[] = [
     id: 5,
     type: "serie",
     title: "Invincible",
+    year: 2021,
     group: "animation",
-    genre: "superheroes",
+    genre: ["superheroes"],
     poster:
       // "https://image.tmdb.org/t/p/original/dMOpdkrDC5dQxqNydgKxXjBKyAc.jpg",
       "/series/invincible/INVINCIBLE (2021).jpg",
@@ -496,6 +501,7 @@ export const series: Serie[] = [
     id: 6,
     type: "serie",
     title: "Gravity Falls",
+    year: 2012,
     group: "animation",
     poster: "/series/gravity_falls/Gravity Falls (2012).jpg",
     color: "rgba(134, 142, 100, 0.8)",
@@ -571,6 +577,7 @@ export const series: Serie[] = [
     id: 7,
     type: "serie",
     title: "El Eternauta",
+    year: 2025,
     poster:
       "https://image.tmdb.org/t/p/original/9Krv5NvKa5a3Q3b1l2B3rP9Bj8E.jpg",
     color: "rgba(40, 145, 173, 0.8)",
@@ -604,6 +611,7 @@ export const series: Serie[] = [
     id: 8,
     type: "serie",
     title: "Silo",
+    year: 2023,
     poster:
       "https://image.tmdb.org/t/p/original/xcCCQKnJqxkjDoDSMz4LmbKhCRP.jpg",
     color: "rgba(188, 160, 93, 0.8)",
@@ -660,6 +668,7 @@ export const series: Serie[] = [
     id: 9,
     type: "serie",
     title: "El Juego del Calamar",
+    year: 2021,
     poster: "/series/juego_del_calamar/Squid Game (2021).jpg",
     color: "rgba(224, 139, 69, 0.8)",
     background:
@@ -725,8 +734,9 @@ export const series: Serie[] = [
     id: 10,
     type: "serie",
     title: "Rick and Morty",
+    year: 2013,
     group: "animation",
-    genre: "comedy",
+    genre: ["comedy"],
     poster: "/series/Rick Y Morty/Rick and Morty (2013).jpeg",
     color: "rgba(163, 216, 66, 0.8)",
     background:
@@ -896,6 +906,7 @@ export const series: Serie[] = [
     id: 11,
     type: "serie",
     title: "Stranger Things",
+    year: 2016,
     poster: "/series/stranger_things/Stranger Things (2016).jpg",
     color: "rgba(227, 33, 33, 0.8)",
     background:
@@ -1001,6 +1012,7 @@ export const series: Serie[] = [
     id: 12,
     type: "serie",
     title: "Los Simpsons",
+    year: 1989,
     group: "animation",
     poster: "/series/los_simpsons/The Simpsons (1989).jpg",
     color: "rgba(255, 255, 0, 0.8)",
@@ -1017,6 +1029,7 @@ export const series: Serie[] = [
     id: 13,
     type: "serie",
     title: "Severance",
+    year: 2022,
     poster: "/series/Severance/Severance (2022).jpg",
     color: "rgba(48, 132, 149, 0.8)",
     background:
@@ -1071,6 +1084,7 @@ export const series: Serie[] = [
     id: 14,
     type: "serie",
     title: "Andor",
+    year: 2022,
     poster: "/series/Andor/Andor (2022).jpg",
     color: "rgba(200, 120, 50, 0.8)",
     background:
@@ -1129,6 +1143,7 @@ export const series: Serie[] = [
     id: 15,
     type: "serie",
     title: "The Bear",
+    year: 2022,
     poster: "/series/the_bear/The Bear (2022).png",
     color: "rgba(152, 201, 202, 0.8)",
     background:
@@ -1221,8 +1236,9 @@ export const series: Serie[] = [
     id: 16,
     type: "serie",
     title: "Avatar: La Leyenda de Aang",
+    year: 2005,
     group: "animation",
-    genre: "fantasy",
+    genre: ["fantasy"],
     poster: "/series/avatar_animada/Avatar- The Last Airbender (2005) (4).png",
     color: "rgba(15, 95, 156, 0.8)",
     background:
@@ -1331,7 +1347,8 @@ export const series: Serie[] = [
     id: 17,
     type: "serie",
     title: "Loki",
-    genre: "superheroes",
+    year: 2021,
+    genre: ["superheroes"],
     poster: "/series/loki/Loki (2021).jpg",
     color: "rgba(117, 180, 69, 0.8)",
     background:
@@ -1378,7 +1395,8 @@ export const series: Serie[] = [
     id: 18,
     type: "serie",
     title: "Arcane",
-    genre: "action",
+    year: 2021,
+    genre: ["action"],
     group: "animation",
     poster: "/series/arcane/Arcane (2021).png",
     color: "rgba(255, 87, 129, 0.8)",
@@ -1431,6 +1449,7 @@ export const series: Serie[] = [
     id: 19,
     type: "serie",
     title: "Samurai de Ojos Azules",
+    year: 2023,
     group: "animation",
     poster: "/series/samurai_azul/BLUE EYE SAMURAI (2023).png",
     color: "rgba(255, 70, 33, 0.8)",
@@ -1465,6 +1484,7 @@ export const series: Serie[] = [
     id: 20,
     type: "serie",
     title: "Shogun",
+    year: 2024,
     poster: "/series/shogun/Shogun (2024).png",
     color: "rgba(255, 255, 255, 0.8)",
     background:
@@ -1498,6 +1518,7 @@ export const series: Serie[] = [
     id: 21,
     type: "serie",
     title: "BoJack Horseman",
+    year: 2014,
     group: "animation",
     poster: "/series/bojack_horseman/BoJack Horseman (2014).jpg",
     // poster: "https://image.tmdb.org/t/p/original/pB9L0jAnEQLMKgexqCEocEW8TA.jpg",

@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, use, useEffect } from "react";
+import { series } from "../series";
 import { movies } from "../movies";
+
 import MovieCarousel from "../components/MovieCarousel";
 import { genres, groupingOptions, orderByOptions } from "../constants";
 import {
   groupMovies,
-  filterMoviesByGenre,
-  filterMoviesByDuration,
-  sortMovies,
+  filterByGenre,
+  sortMedia,
   sortGroupedMovies,
 } from "../logic/MovieUtils";
 
@@ -16,17 +17,20 @@ import MultipleSelectDropdown from "../components/SelectDropdownMultiple";
 import RangeSlider from "../components/RangeSlider";
 import GridCards from "../components/GridCards";
 
-import { getSectionNames } from "../logic/NavUtils";
+// import { getSectionNames } from "../logic/NavUtils";
 import KeyNavHomeSection from "../logic/KeyNavHomeSection";
-export default function HomeSectionMovies() {
+
+const animation_movies = movies.filter((m) => m.group == "animation");
+const animation_series = series.filter((s) => s.group === "animation");
+
+const animation_media = [...animation_movies, ...animation_series];
+console.log("animation", animation_media);
+
+export default function HomeSectionAnimation() {
   const navigate = useNavigate();
   const [genresSelected, setGenresSelected] = useState<string[]>([]);
   const [selectedGrouping, setSelectedGrouping] = useState<string>("");
   const [selectedOrder, setSelectedOrder] = useState<string>("");
-
-  const [durationRange, setDurationRange] = useState<[number, number]>([
-    0, 300,
-  ]); // min y max duración en minutos
 
   const handleGenreChange = (genre: string) => {
     setGenresSelected((prev) =>
@@ -45,20 +49,14 @@ export default function HomeSectionMovies() {
     return order?.label || "";
   };
 
-  //aplico utils
-  const moviesByDuration = filterMoviesByDuration(movies, durationRange);
-  const filteredMovies = filterMoviesByGenre(moviesByDuration, genresSelected);
-  const sortedMovies = sortMovies(filteredMovies, selectedOrder);
-  const groupedMovies = groupMovies(sortedMovies, selectedGrouping);
+  const filteredseries = filterByGenre(animation_media, genresSelected);
+  const sortedseries = sortMedia(filteredseries, selectedOrder);
+  const groupedseries = groupMovies(sortedseries, selectedGrouping);
   const groupedEntries = sortGroupedMovies(
-    groupedMovies,
+    groupedseries,
     selectedGrouping,
     selectedOrder
   );
-
-  useEffect(() => {
-    // console.log("Secciones en la página:", getSectionNames());
-  }, []);
 
   return (
     <div className="p-4 text-white">
@@ -69,7 +67,6 @@ export default function HomeSectionMovies() {
       >
         volver al home
       </button>
-      {/* <h1>Películas</h1> */}
       {/* filtros */}
       <div className="grid grid-cols-4 px-2 gap-4">
         <SingleSelectDropdown
@@ -92,16 +89,6 @@ export default function HomeSectionMovies() {
             )
           }
         />
-        <div className="filtro-duracion bg-black border border-white/50 rounded-md p-4">
-          <RangeSlider
-            label="Duración (minutos)"
-            values={durationRange}
-            min={0}
-            max={300}
-            step={5}
-            onChange={(vals) => setDurationRange(vals as [number, number])}
-          />
-        </div>
         <MultipleSelectDropdown
           label="Filtrar Géneros"
           options={genres}
@@ -113,24 +100,28 @@ export default function HomeSectionMovies() {
       <div className="mt-8">
         <h3 className="text-white text-2xl mb-4">
           {selectedGrouping
-            ? `Películas agrupadas ${getGroupingText().toLowerCase()}`
-            : "Todas las películas"}
+            ? `Productos agrupadas ${getGroupingText().toLowerCase()}`
+            : "Todos los productos"}
         </h3>
       </div>
       {/* Contenido de películas */}
       {selectedGrouping && selectedGrouping !== "none" ? (
         // Carruseles por grupo
-        groupedEntries.map(([groupName, movies]) => (
+        groupedEntries.map(([groupName, animation_media]) => (
           <MovieCarousel
             key={groupName}
             title={groupName}
-            movies={movies}
+            movies={animation_media}
             section={groupName}
           />
         ))
       ) : (
         // Grilla con todas las películas
-        <GridCards media={groupedEntries.flatMap(([_, movies]) => movies)} />
+        <GridCards
+          media={groupedEntries.flatMap(
+            ([_, animation_media]) => animation_media
+          )}
+        />
       )}
     </div>
   );

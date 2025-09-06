@@ -126,6 +126,7 @@ export default function SeriePage({ id }: Props) {
             {selectedSeason.episodes.map((ep) => (
               <ButtonEpisode
                 key={ep.number}
+                idSerie={serie.id}
                 episodeNumber={ep.number}
                 seasonNumber={selectedSeason.season_number}
                 colorSeason={selectedSeason.color}

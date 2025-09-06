@@ -55,7 +55,7 @@ export default function MoviePage({ id }: Props) {
         <p className="mt-4 text-xl">{movie.duration}</p>
 
         <button
-          onClick={() => navigate(`/watch/${movie.id}`)}
+          onClick={() => navigate(`/watch/movie/${movie.id}`)}
           tabIndex={0}
           className="boton px-4 text-left font-bold self-start relative w-full mt-4 h-12 border border-white/50 rounded-xl text-white transition"
           style={

@@ -22,7 +22,7 @@ export default function SingleSelectDropdown({
   return (
     <div className="color-white bg-black border border-white/50 rounded-md p-4">
       <h3 className="text-white mb-3">{label}</h3>
-      <div className="relative">
+      <div className="relative" data-section="select-dropdown-single">
         <button
           onClick={toggleDropdown}
           className="w-full flex items-center justify-between bg-gray-900 text-white border border-gray-600 rounded px-3 py-2 cursor-pointer hover:bg-gray-700"

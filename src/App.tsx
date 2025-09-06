@@ -2,10 +2,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import HomeSectionMovies from "./pages/HomeSectionMovies";
+import HomeSectionAnimation from "./pages/HomeSectionAnimation";
+import HomeSectionSeries from "./pages/HomeSectionSeries";
 import MoviePage from "./pages/MoviePage";
 import SeriePage from "./pages/SeriePage";
 import SearchPage from "./pages/SearchPage";
+
 import WatchVideoPage from "./pages/WatchVideoPage";
+import WatchEpisodePage from "./pages/WatchEpisodePage";
 import KeyboardNavigation from "./logic/KeyboardNavegation";
 import KeyboardNavigationMovie from "./logic/KeyboardNavegationMovie";
 import KeyboardNavigationSerie from "./logic/KeyboardNavigationSerie";
@@ -39,12 +43,19 @@ export default function App() {
         <Routes>
           {/* Definimos las rutas de la pagina */}
           <Route path="/" element={<Home />} />
+          {/* secciones HOME del Top Menu */}
           <Route path="/movies" element={<HomeSectionMovies />} />
+          <Route path="/animation" element={<HomeSectionAnimation />} />
+          <Route path="/series" element={<HomeSectionSeries />} />
           <Route path="/search" element={<SearchPage />} />
 
           <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/serie/:id" element={<SeriePage />} />
-          <Route path="/watch/:id" element={<WatchVideoPage />} />
+          <Route path="/watch/movie/:id" element={<WatchVideoPage />} />
+          <Route
+            path="/watch/serie/:id/s/:season/e/:episode"
+            element={<WatchEpisodePage />}
+          />
         </Routes>
       </main>
     </div>
